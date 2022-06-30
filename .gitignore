@@ -455,3 +455,5 @@ $RECYCLE.BIN/
 
 appsettings.json
 datingapp.db
+client/ssl/server.crt
+client/ssl/server.key
