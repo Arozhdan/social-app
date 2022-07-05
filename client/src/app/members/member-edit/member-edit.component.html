@@ -1,0 +1,61 @@
+<div class="row" *ngIf="member">
+	<div class="col-4"><h1>Your profile</h1></div>
+	<div class="col-8">
+		<div class="alert alert-info text-center" *ngIf="editForm.dirty">
+			<strong>Information:</strong> You have made changes. Any unsaved changes will be lost!
+		</div>
+	</div>
+	<div class="col-4">
+		<div class="card">
+			<img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}" class="card-image-top img-thumbnail">
+		</div>
+		<div class="card-body mt-3">
+			<div>
+				<strong>Location:</strong>
+				<p>{{member.city}}, {{member.country}}</p>
+			</div>
+			<div>
+				<strong>Age:</strong>
+				<p>{{member.age}}</p>
+			</div>
+			<div>
+				<strong>Last active:</strong>
+				<p>{{member.lasActive}}</p>
+			</div>
+			<div>
+				<strong>Member since:</strong>
+				<p>{{member.created}}</p>
+			</div>
+		</div>
+		<div class="card-footer">
+			<button [disabled]="!editForm.dirty" style="opacity: {{!editForm.dirty ? '0.5' : '1'}}" class="btn-success btn-block" type="submit" form="editForm">Save Changes</button>
+		</div>
+	</div>
+	<div class="col-8">
+		<tabset class="member-tabeset">
+			<tab heading="About {{member.knownAs}}">
+				<form #editForm="ngForm" (ngSubmit)="updateMember()" id="editForm">
+					<h4 class="mt-4">Desciption</h4>
+					<textarea class="form-control" [(ngModel)]="member.introduction" name="introduction" rows="6"></textarea>
+					<h4 class="mt-2">Looking for</h4>
+					<textarea class="form-control" [(ngModel)]="member.lookingFor" name="lookingFor" rows="6"></textarea>
+					<h4 class="mt-2">Interests</h4>
+					<textarea class="form-control" [(ngModel)]="member.interests" name="interests" rows="6"></textarea>
+					<h4 class="mt-2">Location details:</h4>
+					<div class="form-inline mb-5">
+						<label for="city">City:
+							<input [(ngModel)]="member.city" type="text" name="city" class="form-control mx-2">
+						</label>
+						<label for="city">Country:
+							<input [(ngModel)]="member.country" type="text" name="country" class="form-control mx-2">
+						</label>
+					</div>
+				</form>
+			</tab>
+			<tab heading="Edit Photos">
+				<h4 class="mt-4">Interests</h4>
+				<p>Photo edit will go here</p>
+			</tab>
+		</tabset>
+	</div>
+</div>
